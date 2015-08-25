@@ -31,6 +31,17 @@ var Piece = function(type, image, startingPosition) {
         pieceImage.attr('src', 'chess pieces/' + this.image);
         target.append(pieceImage);
         this.location = location;
+        //put a click listener to link to pieceImage//
+        var self = this;
+        this.type
+        pieceImage.click(function(){
+        //write a function to get board coordinates in a [row,column] form.//
+        //Similar to what I did in the placePiece function with var originCoordinates.//
+                    var pos = self.location;
+            
+            }
+
+        });
     }
     this.placePiece(this.startingPosition);
 }
