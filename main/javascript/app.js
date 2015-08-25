@@ -17,6 +17,15 @@ var Piece = function(type, image, startingPosition) {
     this.placePiece = function(location) {
         var origin = $('#'+this.location);
         origin.empty();
+        var originCoordinates = getBoardCoordinates(this.location);
+        var originRow = originCoordinates[0];
+        var originColumn = originCoordinates[1];
+        chessboard[originRow][originColumn] = null;
+        //this places the piece in the new location//
+        var targetCoordinates = getBoardCoordinates(location);
+        var targetRow = targetCoordinates[0];
+        var targetColumn = targetCoordinates[1];
+        chessboard[targetRow][targetColumn] = this;
         var target = $('#'+location);
         var pieceImage = $('<img style="width:65px;height:65px;">');
         pieceImage.attr('src', 'chess pieces/' + this.image);
@@ -25,6 +34,42 @@ var Piece = function(type, image, startingPosition) {
     }
     this.placePiece(this.startingPosition);
 }
+
+function getBoardCoordinates(location) {
+    var locationparts = location.split("-");
+    var row = Number(locationparts[1])-1;
+    var column = locationparts[2];
+    switch(column) {
+        case 'a':
+            column = 0
+            break;
+        case 'b':
+            column = 1
+            break;
+        case 'c':
+            column = 2
+            break;
+        case 'd':
+            column = 3
+            break;
+        case 'e':
+            column = 4
+            break;
+        case 'f':
+            column = 5
+            break;
+        case 'g':
+            column = 6
+            break;
+        case 'h':
+            column = 7
+            break;
+    }
+    return [row,column];
+
+
+}
+
 new Piece("pawn", "White-Pawn.svg", "sqr-2-a");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-b");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-c");
