@@ -59,6 +59,11 @@ var Piece = function(type, image, startingPosition) {
                     break;                
                 //add case 'queen' here and make it work
                 //add case 'king' here and make it work
+                case 'king':
+                    console.log(originCoordinates);
+                    var possiblities = kingMove(originRow,originColumn);
+                    console.log(possiblities);
+                    break;
                 //add case 'bishop' here and make it work
                 case 'bishop':
                     console.log(originCoordinates);
@@ -197,6 +202,25 @@ function rookMove(row,column){
     var probableCells = straightMoves(row,column);
     return validCells(probableCells);
 }
+
+function kingMove(row,column){
+    var probableCells = [
+
+        [row +1, column],
+        [row -1, column],
+        [row, column + 1],
+        [row, column - 1],
+        [row +1, column - 1],
+        [row +1, column + 1],
+        [row -1, column - 1],
+        [row -1, column + 1]
+
+
+
+    ];
+    return validCells(probableCells);
+}
+
 
 function straightMoves(row,column){
 //function straightMoves(number){
