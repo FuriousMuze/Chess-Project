@@ -40,17 +40,26 @@ var Piece = function(type, image, startingPosition) {
                     var pos = self.location;
                     console.log(self);
                     //code goes here//
+            var originCoordinates = getBoardCoordinates(self.location);
+            var originRow = originCoordinates[0];
+            var originColumn = originCoordinates[1];                    
             switch(self.type) {
                 case 'knight':
-                    console.log('you got a knight');
-                    var originCoordinates = getBoardCoordinates(self.location);
-                    var originRow = originCoordinates[0];
-                    var originColumn = originCoordinates[1];
+                    console.log('you selected a knight');
                     console.log(originCoordinates);
                     var possiblities = knightMove(originRow,originColumn);
                     console.log(possiblities);
-
                     break;
+                //add case 'rook' here and make it work
+                //add case 'queen' here and make it work
+                //add case 'king' here and make it work
+                //add case 'bishop' here and make it work
+                case 'bishop':
+                    console.log(originCoordinates);
+                    var possiblities = bishopMove(originRow,originColumn);
+                    console.log(possiblities);
+                    break;  
+                //add case 'pawn' here and make it work
             }
 
         });
@@ -154,10 +163,32 @@ function knightMove(row,column){
     return validCells(probableCells);
 }
 
+function bishopMove(row,column){
+    var probableCells = diagonalMoves(row,column);
+    return validCells(probableCells);
+}
 
+function diagonalMoves(row,column){
+    var diagonals = [];
+    var forwardRows = 7 - row;
+    var backwardRows = row;
+    for(var i = 1; i <= forwardRows; i++){
+        var left = [row + i, column - i];
+        var right = [row + i, column + i];
+        diagonals.push(left);
+        diagonals.push(right);
+    }
+    for(var i = 1; i <= backwardRows; i++){
+        var left = [row - i, column - i];
+        var right = [row - i, column + i];
+        diagonals.push(left);
+        diagonals.push(right);
+    }
+    return diagonals;
+}
 
 function straightMoves(number){
-    
+    //make this function work with the click
     var spaces = [];
     for (i = number-1; i >= 0; i--){
         spaces.push(i);
