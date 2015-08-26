@@ -58,6 +58,11 @@ var Piece = function(type, image, startingPosition) {
                     console.log(possiblities);
                     break;                
                 //add case 'queen' here and make it work
+                case 'queen':
+                    console.log(originCoordinates);
+                    var possiblities = queenMove(originRow,originColumn);
+                    console.log(possiblities);
+                    break;
                 //add case 'king' here and make it work
                 case 'king':
                     console.log(originCoordinates);
@@ -219,6 +224,12 @@ function kingMove(row,column){
 
     ];
     return validCells(probableCells);
+}
+
+function queenMove(row,column){
+    var probableCellsOne = bishopMove(row,column);
+    var probableCellsTwo = rookMove(row,column);
+    return probableCellsOne.concat(probableCellsTwo);
 }
 
 
