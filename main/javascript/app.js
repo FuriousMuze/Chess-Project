@@ -44,6 +44,7 @@ var Piece = function(type, image, startingPosition) {
             var originRow = originCoordinates[0];
             var originColumn = originCoordinates[1];                    
             switch(self.type) {
+                //add case 'knight' here and make it work
                 case 'knight':
                     console.log('you selected a knight');
                     console.log(originCoordinates);
@@ -51,6 +52,11 @@ var Piece = function(type, image, startingPosition) {
                     console.log(possiblities);
                     break;
                 //add case 'rook' here and make it work
+                case 'rook':
+                    console.log(originCoordinates);
+                    var possiblities = rookMove(originRow,originColumn);
+                    console.log(possiblities);
+                    break;                
                 //add case 'queen' here and make it work
                 //add case 'king' here and make it work
                 //add case 'bishop' here and make it work
@@ -187,16 +193,42 @@ function diagonalMoves(row,column){
     return diagonals;
 }
 
-function straightMoves(number){
+function rookMove(row,column){
+    var probableCells = straightMoves(row,column);
+    return validCells(probableCells);
+}
+
+function straightMoves(row,column){
+//function straightMoves(number){
     //make this function work with the click
     var spaces = [];
-    for (i = number-1; i >= 0; i--){
-        spaces.push(i);
+    // for (i = number-1; i >= 0; i--){
+    //     spaces.push(i);
         
+    // }
+    // for (i = number+1; i <= 7; i++){
+    //     spaces.push(i);
+    //     console.log(spaces);
+    //}
+    var maxForward = 7 - row;
+    var maxBackward = row;
+    var maxRight = 7 - column;
+    var maxLeft = column;
+    for(var i=1; i<=maxForward; i++){
+        var space = [row + i, column];
+        spaces.push(space);
     }
-    for (i = number+1; i <= 7; i++){
-        spaces.push(i);
-        console.log(spaces);
+    for(var i=1; i<=maxBackward; i++){
+        var space = [row - i, column];
+        spaces.push(space);
+    }
+    for(var i=1; i<=maxRight; i++){
+        var space = [row, column + i];
+        spaces.push(space);
+    }
+    for(var i=1; i<=maxLeft; i++){
+        var space = [row, column - i];
+        spaces.push(space);
     }
     return spaces;
 }
