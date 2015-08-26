@@ -9,7 +9,7 @@ var chessboard =		[[null, null, null, null, null, null, null, null],
 //to do: don't hardcode the pawn moves
 var currentPlayer = "white"
 
-var Piece = function(type, image, startingPosition,color) {
+var Piece = function(type, image, startingPosition, color) {
     this.color = color;
     this.type = type;
     this.image = image;
@@ -77,6 +77,11 @@ var Piece = function(type, image, startingPosition,color) {
                     console.log(possiblities);
                     break;  
                 //add case 'pawn' here and make it work
+                case 'pawn':
+                    console.log(originCoordinates);
+                    var possiblities = pawnMove(originRow,originColumn);
+                    console.log(possiblities);
+                    break;
             }
 
         });
@@ -249,13 +254,26 @@ function pawnMove(row,column){
         if(row ==1){
             spaces.push([row +2,column]);
         }
+        if(ocupado(chessboard[row +1][column -1])=="black"){
+            spaces.push([row +1][column -1]);
+        }
+        if(ocupado(chessboard[row +1][column +1])=="black"){
+            spaces.push([row +1][column +1]);
+        }
     }
     else{
         spaces.push([row -1,column]);
         if(row ==6){
             spaces.push([row -2,column]);
         }
+        if(ocupado(chessboard[row -1][column -1])=="white"){
+            spaces.push([row -1][column -1]);
+        }
+        if(ocupado(chessboard[row -1][column +1])=="white"){
+            spaces.push([row -1][column +1]);
+        }
     }
+    return validCells(spaces);
 }
 
 
