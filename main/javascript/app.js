@@ -38,7 +38,19 @@ var Piece = function(type, image, startingPosition) {
         //write a function to get board coordinates in a [row,column] form.//
         //Similar to what I did in the placePiece function with var originCoordinates.//
                     var pos = self.location;
-            
+                    console.log(self);
+                    //code goes here//
+            switch(self.type) {
+                case 'knight':
+                    console.log('you got a knight');
+                    var originCoordinates = getBoardCoordinates(self.location);
+                    var originRow = originCoordinates[0];
+                    var originColumn = originCoordinates[1];
+                    console.log(originCoordinates);
+                    var possiblities = knightMove(originRow,originColumn);
+                    console.log(possiblities);
+
+                    break;
             }
 
         });
@@ -125,8 +137,61 @@ new Piece("bishop", "Black-Bishop.svg", "sqr-8-f");
 new Piece("king", "Black-King.svg", "sqr-8-e");
 new Piece("queen", "Black-Queen.svg", "sqr-8-d");
 
+function knightMove(row,column){
+    var probableCells = [
+
+        [row +2, column+1],
+        [row-2, column+1],
+        [row+2, column-1],
+        [row-2, column-1],
+        [row+1, column+2],
+        [row-1, column+2],
+        [row+1, column-2],
+        [row-1, column+2]
+
+    ];
+
+    return validCells(probableCells);
+}
 
 
+
+function straightMoves(number){
+    
+    var spaces = [];
+    for (i = number-1; i >= 0; i--){
+        spaces.push(i);
+        
+    }
+    for (i = number+1; i <= 7; i++){
+        spaces.push(i);
+        console.log(spaces);
+    }
+    return spaces;
+}
+
+function validCells(probabilities) {
+    var possibleCells = [];
+
+    for(i=0;i < probabilities.length;i ++) {
+        if(checkBounds(probabilities[i])){
+            possibleCells.push(probabilities[i]);
+        }
+    }
+    return possibleCells;
+}
+
+function checkBounds(coordinates){
+    if(checkRange(coordinates[0]) && checkRange(coordinates[1])) {
+        return true;
+    }
+}
+
+function checkRange(number){
+    if(number >= 0 && number <= 7){
+        return true;
+    }
+}
 
 
 
