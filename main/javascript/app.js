@@ -141,27 +141,27 @@ new Piece("bishop", "White-Bishop.svg", "sqr-1-f", "white");
 new Piece("king", "White-King.svg", "sqr-1-e", "white");
 new Piece("queen", "White-Queen.svg", "sqr-1-d", "white");
 
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-a");
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-b");
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-c");
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-d");
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-e");
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-f");
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-g");
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-h");
+new Piece("pawn", "Black-Pawn.svg", "sqr-7-a", "black");
+new Piece("pawn", "Black-Pawn.svg", "sqr-7-b", "black");
+new Piece("pawn", "Black-Pawn.svg", "sqr-7-c", "black");
+new Piece("pawn", "Black-Pawn.svg", "sqr-7-d", "black");
+new Piece("pawn", "Black-Pawn.svg", "sqr-7-e", "black");
+new Piece("pawn", "Black-Pawn.svg", "sqr-7-f", "black");
+new Piece("pawn", "Black-Pawn.svg", "sqr-7-g", "black");
+new Piece("pawn", "Black-Pawn.svg", "sqr-7-h", "black");
 
-new Piece("rook", "Black-Rook.svg", "sqr-8-a");
-new Piece("rook", "Black-Rook.svg", "sqr-8-h");
+new Piece("rook", "Black-Rook.svg", "sqr-8-a", "black");
+new Piece("rook", "Black-Rook.svg", "sqr-8-h", "black");
 
 
-new Piece("knight", "Black-Knight.svg", "sqr-8-b");
-new Piece("knight", "Black-Knight.svg", "sqr-8-g");
+new Piece("knight", "Black-Knight.svg", "sqr-8-b", "black");
+new Piece("knight", "Black-Knight.svg", "sqr-8-g", "black");
 
-new Piece("bishop", "Black-Bishop.svg", "sqr-8-c");
-new Piece("bishop", "Black-Bishop.svg", "sqr-8-f");
+new Piece("bishop", "Black-Bishop.svg", "sqr-8-c", "black");
+new Piece("bishop", "Black-Bishop.svg", "sqr-8-f", "black");
 
-new Piece("king", "Black-King.svg", "sqr-8-e");
-new Piece("queen", "Black-Queen.svg", "sqr-8-d");
+new Piece("king", "Black-King.svg", "sqr-8-e", "black");
+new Piece("queen", "Black-Queen.svg", "sqr-8-d", "black");
 
 function knightMove(row,column){
     var probableCells = [
