@@ -6,10 +6,11 @@ var chessboard =		[[null, null, null, null, null, null, null, null],
                     	 [null, null, null, null, null, null, null, null],
                     	 [null, null, null, null, null, null, null, null],
                     	 [null, null, null, null, null, null, null, null]];
+//to do: don't hardcode the pawn moves
+var currentPlayer = "white"
 
-
-
-var Piece = function(type, image, startingPosition) {
+var Piece = function(type, image, startingPosition,color) {
+    this.color = color;
     this.type = type;
     this.image = image;
     this.startingPosition = startingPosition;
@@ -118,27 +119,27 @@ function getBoardCoordinates(location) {
 
 }
 
-new Piece("pawn", "White-Pawn.svg", "sqr-2-a");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-b");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-c");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-d");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-e");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-f");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-g");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-h");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-a", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-b", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-c", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-d", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-e", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-f", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-g", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-h", "white");
 
-new Piece("rook", "White-Rook.svg", "sqr-1-a");
-new Piece("rook", "White-Rook.svg", "sqr-1-h");
+new Piece("rook", "White-Rook.svg", "sqr-1-a", "white");
+new Piece("rook", "White-Rook.svg", "sqr-1-h", "white");
 
 
-new Piece("knight", "White-Knight.svg", "sqr-1-b");
-new Piece("knight", "White-Knight.svg", "sqr-1-g");
+new Piece("knight", "White-Knight.svg", "sqr-1-b", "white");
+new Piece("knight", "White-Knight.svg", "sqr-1-g", "white");
 
-new Piece("bishop", "White-Bishop.svg", "sqr-1-c");
-new Piece("bishop", "White-Bishop.svg", "sqr-1-f");
+new Piece("bishop", "White-Bishop.svg", "sqr-1-c", "white");
+new Piece("bishop", "White-Bishop.svg", "sqr-1-f", "white");
 
-new Piece("king", "White-King.svg", "sqr-1-e");
-new Piece("queen", "White-Queen.svg", "sqr-1-d");
+new Piece("king", "White-King.svg", "sqr-1-e", "white");
+new Piece("queen", "White-Queen.svg", "sqr-1-d", "white");
 
 new Piece("pawn", "Black-Pawn.svg", "sqr-7-a");
 new Piece("pawn", "Black-Pawn.svg", "sqr-7-b");
@@ -230,6 +231,31 @@ function queenMove(row,column){
     var probableCellsOne = bishopMove(row,column);
     var probableCellsTwo = rookMove(row,column);
     return probableCellsOne.concat(probableCellsTwo);
+}
+
+function ocupado(cell){
+    if(cell == null){
+        return null;
+    }
+    else{
+        return cell.color;
+    }
+}
+
+function pawnMove(row,column){
+    var spaces = [];
+    if(currentPlayer == "white"){
+        spaces.push([row +1, column]);
+        if(row ==1){
+            spaces.push([row +2,column]);
+        }
+    }
+    else{
+        spaces.push([row -1,column]);
+        if(row ==6){
+            spaces.push([row -2,column]);
+        }
+    }
 }
 
 
