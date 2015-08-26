@@ -47,7 +47,6 @@ var Piece = function(type, image, startingPosition, color) {
             switch(self.type) {
                 //add case 'knight' here and make it work
                 case 'knight':
-                    console.log('you selected a knight');
                     console.log(originCoordinates);
                     var possiblities = knightMove(originRow,originColumn);
                     console.log(possiblities);
@@ -245,6 +244,7 @@ function ocupado(cell){
     else{
         return cell.color;
     }
+
 }
 
 function pawnMove(row,column){
@@ -295,19 +295,53 @@ function straightMoves(row,column){
     var maxLeft = column;
     for(var i=1; i<=maxForward; i++){
         var space = [row + i, column];
-        spaces.push(space);
+        if(ocupado(chessboard[row +i][column])){
+            if(ocupado(chessboard[row +i][column])!=currentPlayer){
+                spaces.push(space);
+            }
+            break;
+        }
+        else {
+            spaces.push(space);
+        }
     }
     for(var i=1; i<=maxBackward; i++){
         var space = [row - i, column];
-        spaces.push(space);
+        if(ocupado(chessboard[row -i][column])){
+            if(ocupado(chessboard[row -i][column])!=currentPlayer){
+                spaces.push(space);
+            }
+            break;
+        }
+        else {
+            spaces.push(space);
+        }
     }
+
     for(var i=1; i<=maxRight; i++){
-        var space = [row, column + i];
-        spaces.push(space);
+        var space = [row, column +i];
+        if(ocupado(chessboard[row][column +i])){
+            if(ocupado(chessboard[row][column +i])!=currentPlayer){
+                spaces.push(space);
+            }
+            break;
+        }
+        else {
+            spaces.push(space);
+        }
     }
+    
     for(var i=1; i<=maxLeft; i++){
         var space = [row, column - i];
-        spaces.push(space);
+        if(ocupado(chessboard[row][column -i])){
+            if(ocupado(chessboard[row][column -i])!=currentPlayer){
+                spaces.push(space);
+            }
+            break;
+        }
+        else {
+            spaces.push(space);
+        }
     }
     return spaces;
 }
