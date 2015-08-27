@@ -83,7 +83,8 @@ var Piece = function(type, image, startingPosition, color) {
                     console.log(possiblities);
                     break;
             }
-
+                console.log("possIds");
+                var moves = (getGridId(possiblities));
         });
     }
     this.placePiece(this.startingPosition);
@@ -124,7 +125,43 @@ function getBoardCoordinates(location) {
 
 }
 
-function
+function getGridId(coordinates){
+    var possIds = [];
+    for(var i = 0;i< coordinates.length;i ++){
+        var row = coordinates[i][0]+1;
+        var column = coordinates [i][1];
+        //ToDo:construct string corresponding to DOM elm id on board
+        switch(column) {
+            case '0':
+                column = "a"
+                break;
+            case '1':
+                column = "b"
+                break;
+            case '2':
+                column = "c"
+                break;
+            case '3':
+                column = "d"
+                break;
+            case '4':
+                column = "e"
+                break;
+            case '5':
+                column = "f"
+                break;
+            case '6':
+                column = "g"
+                break;
+            case '7':
+                column = "h"
+                break;
+        }    
+        possIds.push("sqr"+ "-" + row + "-" + column);
+    }
+    
+    return possIds;
+}
 
 new Piece("pawn", "White-Pawn.svg", "sqr-2-a", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-b", "white");
