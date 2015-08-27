@@ -9,13 +9,14 @@ var chessboard =		[[null, null, null, null, null, null, null, null],
 //to do: don't hardcode the pawn moves
 var currentPlayer = "white"
 
-var Piece = function(type, image, startingPosition, color) {
+var Piece = function(type, image, startingPosition, color, living) {
     this.color = color;
     this.type = type;
     this.image = image;
     this.startingPosition = startingPosition;
     this.location = startingPosition;
     this.selected = false;
+    this.living = true;
     this.placePiece = function(location) {
         var origin = $('#'+this.location);
         origin.empty();
@@ -83,20 +84,45 @@ var Piece = function(type, image, startingPosition, color) {
                     console.log(possiblities);
                     break;
             }
-                console.log("possIds");
-                var moves = getGridId(possiblities);
-                for(i = 0; i<moves.length; i ++){
-                    var id = moves[i];
-                $("#" + id).css({backgroundColor: "yellow"}).addClass("option");
-                console.log($("#" + id));
+
+            console.log("possIds");
+            var moves = getGridId(possiblities);
+            $(".option").removeClass("option");
+            for(i = 0; i<moves.length; i ++){
+                var id = moves[i];
+                console.log("id:" + id);
+                console.log(self.color);
+                if(!checkForAlly(self.color, id)){
+                    $("#" + id).addClass("option");
+                    console.log($("#" + id));
                 }
-                
+            }
+
         });
+        $(".option").click("option");
             
     }
     this.placePiece(this.startingPosition);
+
+    this.moveDOMPiece = function() {
+
+    }
+
+    this.moveArrayPiece = function() {
+
+    }
 }
 
+function checkForAlly(myColor, id) {
+   var coord = getBoardCoordinates(id);
+   var x =chessboard[coord[0]][coord[1]];
+   if(x != null && x.color == myColor){
+    console.log('ally! ' + id);
+    return true;
+   } else {
+    console.log('not an ally');
+   }
+} 
 
 function getBoardCoordinates(location) {
     var locationparts = location.split("-");
@@ -173,9 +199,9 @@ function getGridId(coordinates){
 
 new Piece("pawn", "White-Pawn.svg", "sqr-2-a", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-b", "white");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-c", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-4-c", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-d", "white");
-new Piece("pawn", "White-Pawn.svg", "sqr-2-e", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-4-e", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-f", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-g", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-h", "white");
@@ -200,7 +226,7 @@ new Piece("pawn", "Black-Pawn.svg", "sqr-7-d", "black");
 new Piece("pawn", "Black-Pawn.svg", "sqr-7-e", "black");
 new Piece("pawn", "Black-Pawn.svg", "sqr-7-f", "black");
 new Piece("pawn", "Black-Pawn.svg", "sqr-7-g", "black");
-new Piece("pawn", "Black-Pawn.svg", "sqr-7-h", "black");
+new Piece("pawn", "Black-Pawn.svg", "sqr-5-h", "black");
 
 new Piece("rook", "Black-Rook.svg", "sqr-8-a", "black");
 new Piece("rook", "Black-Rook.svg", "sqr-8-h", "black");
