@@ -15,6 +15,7 @@ var Piece = function(type, image, startingPosition, color) {
     this.image = image;
     this.startingPosition = startingPosition;
     this.location = startingPosition;
+    this.selected = false;
     this.placePiece = function(location) {
         var origin = $('#'+this.location);
         origin.empty();
@@ -123,6 +124,8 @@ function getBoardCoordinates(location) {
 
 }
 
+function
+
 new Piece("pawn", "White-Pawn.svg", "sqr-2-a", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-b", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-c", "white");
@@ -193,20 +196,65 @@ function diagonalMoves(row,column){
     var diagonals = [];
     var forwardRows = 7 - row;
     var backwardRows = row;
+    
+    //do what you did to the for loops in straightMoves here 
     for(var i = 1; i <= forwardRows; i++){
-        var left = [row + i, column - i];
-        var right = [row + i, column + i];
-        diagonals.push(left);
-        diagonals.push(right);
+        var left = [row + i, column -i];
+        if(ocupado(chessboard[row +i][column -i])){
+            if(ocupado(chessboard[row +i][column -i])!=currentPlayer){
+                diagonals.push(left);
+            }
+            break;
+        }
+        else{
+            diagonals.push(left);
+        }
     }
+
+    for(var i = 1; i <= forwardRows; i++){    
+        var right = [row + i, column + i];
+        if(ocupado(chessboard[row +i][column +i])){
+            if(ocupado(chessboard[row +i][column +i])!=currentPlayer){
+                diagonals.push(right);
+            }
+            break;
+        }
+        else{
+            diagonals.push(right);
+        }
+    }
+
     for(var i = 1; i <= backwardRows; i++){
         var left = [row - i, column - i];
-        var right = [row - i, column + i];
-        diagonals.push(left);
-        diagonals.push(right);
+        if(ocupado(chessboard[row -i][column -i])){
+            if(ocupado(chessboard[row -i][column -i])!=currentPlayer){
+                diagonals.push(left);
+            }
+            break;
+        }
+        else{
+            diagonals.push(left);
+        }
     }
+
+    for(var i = 1; i <= backwardRows; i++){
+        var right = [row - i, column + i];
+        if(ocupado(chessboard[row -i][column +i])){
+            if(ocupado(chessboard[row -i][column +i])!=currentPlayer){
+                diagonals.push(right);
+            }
+            break;
+        }
+        else{
+            diagonals.push(right);
+        }
+    }
+    
     return diagonals;
+    
 }
+
+
 
 function rookMove(row,column){
     var probableCells = straightMoves(row,column);
@@ -339,7 +387,7 @@ function straightMoves(row,column){
             }
             break;
         }
-        else {
+        else{
             spaces.push(space);
         }
     }
