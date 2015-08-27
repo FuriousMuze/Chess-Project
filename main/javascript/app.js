@@ -84,11 +84,19 @@ var Piece = function(type, image, startingPosition, color) {
                     break;
             }
                 console.log("possIds");
-                var moves = (getGridId(possiblities));
+                var moves = getGridId(possiblities);
+                for(i = 0; i<moves.length; i ++){
+                    var id = moves[i];
+                $("#" + id).css({backgroundColor: "yellow"}).addClass("option");
+                console.log($("#" + id));
+                }
+                
         });
+            
     }
     this.placePiece(this.startingPosition);
 }
+
 
 function getBoardCoordinates(location) {
     var locationparts = location.split("-");
@@ -132,28 +140,28 @@ function getGridId(coordinates){
         var column = coordinates [i][1];
         //ToDo:construct string corresponding to DOM elm id on board
         switch(column) {
-            case '0':
+            case 0:
                 column = "a"
                 break;
-            case '1':
+            case 1:
                 column = "b"
                 break;
-            case '2':
+            case 2:
                 column = "c"
                 break;
-            case '3':
+            case 3:
                 column = "d"
                 break;
-            case '4':
+            case 4:
                 column = "e"
                 break;
-            case '5':
+            case 5:
                 column = "f"
                 break;
-            case '6':
+            case 6:
                 column = "g"
                 break;
-            case '7':
+            case 7:
                 column = "h"
                 break;
         }    
