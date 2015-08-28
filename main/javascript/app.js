@@ -7,13 +7,11 @@ var chessboard =		[[null, null, null, null, null, null, null, null],
                     	 [null, null, null, null, null, null, null, null],
                     	 [null, null, null, null, null, null, null, null]];
 //to do: don't hardcode the pawn moves
-var currentPlayer = "white"
-$("#sqr-8-a").click(function() {
-    return [7, 0];
-})
+var currentPlayer = "white";
+
     
 var Piece = function(type, image, startingPosition, color, living) {
-    var self = this;
+    //var self = this;
     this.color = color;
     this.type = type;
     this.image = image;
@@ -89,7 +87,7 @@ var Piece = function(type, image, startingPosition, color, living) {
                     break;
             }
 
-            console.log("possIds");
+            //console.log("possIds");
             var moves = getGridId(possiblities);
             $(".option").removeClass("option");
             for(i = 0; i<moves.length; i ++){
@@ -209,7 +207,7 @@ function getGridId(coordinates){
     return possIds;
 }
 
-var Pawn1 = new Piece("pawn", "White-Pawn.svg", "sqr-2-a", "white");
+new Piece("pawn", "White-Pawn.svg", "sqr-2-a", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-b", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-c", "white");
 new Piece("pawn", "White-Pawn.svg", "sqr-2-d", "white");
@@ -253,13 +251,7 @@ new Piece("bishop", "Black-Bishop.svg", "sqr-8-f", "black");
 new Piece("king", "Black-King.svg", "sqr-8-e", "black");
 new Piece("queen", "Black-Queen.svg", "sqr-8-d", "black");
 
-function pieceMove(){
-    if(validCells===null){
-    }
-    else{
 
-    }
-}
 
 function knightMove(row,column){
     var probableCells = [
